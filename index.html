@@ -1,11 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task list</title>
+    <script src="index.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'roboto': ['Roboto', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
 </head>
+
 <body>
-    
+    <header class="rounded-xl shadow-lg bg-slate-900 text-white">
+        <h1 class="text-center text-4xl p-5 font-serif">Task list</h1>
+    </header>
+
+    <main class="flex justify-center my-20">
+        <form class="flex flex-row items-center border border-gray-300 rounded-lg shadow-lg gap-20 p-10">
+            <div class="flex flex-col items-center gap-14 h-full">
+                <div class="flex gap-5">
+                    <label class="flex items-center" for="task">Task:</label>
+                    <textarea class="border border-gray-400 rounded-lg shadow-md px-4" name="task" id="task" rows="4"></textarea>
+                </div>
+                <div class="flex gap-5">
+                    <label class="flex items-center" for="startDate">Start date:</label>
+                    <input type="date" class="border border-gray-400 rounded-lg shadow-md p-1 px-4" name="startDate" id="startDate">
+                </div>
+                <div class="flex gap-5">
+                    <label class="flex items-center" for="endDate">End date:</label>
+                    <input type="date" class="border border-gray-400 rounded-lg shadow-md p-1 px-4" name="endDate" id="endDate">
+                </div>
+            </div>
+            <div class="border border-gray-300 rounded-lg shadow-md p-10 h-full w-96">
+                <ul class="list-disc list-inside" id="list-items"></ul>
+            </div>
+        </form>
+    </main>
 </body>
+
 </html>
