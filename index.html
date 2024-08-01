@@ -20,29 +20,39 @@
     </script>
 </head>
 
-<body>
-    <header class="rounded-xl shadow-lg bg-slate-900 text-white">
-        <h1 class="text-center text-4xl p-5 font-serif">Task list</h1>
+<body class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 font-serif">
+    <header class="bg-slate-900 rounded-xl shadow-lg text-white">
+        <h1 class="text-center text-4xl p-5">Task list</h1>
+        <hr class="border-gray-800">
     </header>
 
-    <main class="flex justify-center my-20">
-        <form class="flex flex-row items-center border border-gray-300 rounded-lg shadow-lg gap-20 p-10">
+    <main class="flex justify-center text-white text-base my-12">
+        <form class="flex flex-row items-center bg-slate-900 border border-gray-800 rounded-lg shadow-xl gap-20 p-10">
             <div class="flex flex-col items-center gap-14 h-full">
                 <div class="flex gap-5">
                     <label class="flex items-center" for="task">Task:</label>
-                    <textarea class="border border-gray-400 rounded-lg shadow-md px-4" name="task" id="task" rows="4"></textarea>
+                    <textarea class="border border-gray-700 bg-slate-700 text-white rounded-lg shadow-md px-4"
+                        name="task" id="task" rows="4"></textarea>
                 </div>
                 <div class="flex gap-5">
                     <label class="flex items-center" for="startDate">Start date:</label>
-                    <input type="date" class="border border-gray-400 rounded-lg shadow-md p-1 px-4" name="startDate" id="startDate">
+                    <input type="date"
+                        class="border border-gray-700 bg-slate-700 text-slate-900 rounded-lg shadow-md p-1 px-4"
+                        name="startDate" id="startDate">
                 </div>
                 <div class="flex gap-5">
                     <label class="flex items-center" for="endDate">End date:</label>
-                    <input type="date" class="border border-gray-400 rounded-lg shadow-md p-1 px-4" name="endDate" id="endDate">
+                    <input type="date"
+                        class="border border-gray-700 bg-slate-700 rounded-lg shadow-md text-slate-900 p-1 px-4"
+                        name="endDate" id="endDate">
+                </div>
+                <div class="flex gap-5">
+                    <button id="register-button"
+                        class="bg-slate-800 text-lg border border-slate-700 rounded-lg p-1 px-12">Register</button>
                 </div>
             </div>
-            <div class="border border-gray-300 rounded-lg shadow-md p-10 h-full w-96">
-                <ul class="list-disc list-inside" id="list-items"></ul>
+            <div class="bg-slate-700 border border-gray-800 rounded-lg shadow-md p-10 h-full w-96">
+                <ul class="list-disc list-inside" id="list-items">uuu</ul>
             </div>
         </form>
     </main>
