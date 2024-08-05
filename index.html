@@ -27,7 +27,7 @@
     </header>
 
     <main class="flex justify-center text-white text-base my-12">
-        <form class="flex flex-row items-center bg-slate-900 border border-gray-800 rounded-lg shadow-xl gap-20 p-10">
+        <form class="flex flex-row items-center bg-slate-900 border border-gray-800 rounded-lg shadow-xl w-screen mx-20 gap-20 p-10">
             <div class="flex flex-col items-center gap-14 h-full">
                 <div class="flex gap-5">
                     <label class="flex items-center" for="textAreaTask">Task:</label>
@@ -51,8 +51,67 @@
                         class="bg-slate-800 text-lg border border-slate-700 rounded-lg p-1 px-12">Register</button>
                 </div>
             </div>
-            <div class="bg-slate-700 border border-gray-800 rounded-lg shadow-md p-10 h-full w-96">
-                <ul class="list-disc list-inside" id="list-items"></ul>
+            <div class="bg-slate-700 border border-gray-800 rounded-lg shadow-md p-5 h-full w-full">
+                <table class="text-center h-full w-full" id="list-items">
+                    <thead id="table-header">
+                        <tr>
+                            <th class="item-header border-collapse border border-slate-900 py-2">Domingo</th>
+                            <th class="item-header border-collapse border border-slate-900 py-2">Segunda</th>
+                            <th class="item-header border-collapse border border-slate-900 p-2">Terça</th>
+                            <th class="item-header border-collapse border border-slate-900 py-2">Quarta</th>
+                            <th class="item-header border-collapse border border-slate-900 py-2">Quinta</th>
+                            <th class="item-header border-collapse border border-slate-900 v">Sexta</th>
+                            <th class="item-header border-collapse border border-slate-900 py-2">Sábado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                        </tr>
+                        <tr>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                        </tr>
+                        <tr>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                        </tr>
+                        <tr>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                        </tr>
+                        <tr>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                            <td class="item border-collapse border border-slate-900"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </form>
     </main>
