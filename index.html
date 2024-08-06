@@ -51,9 +51,15 @@
                         class="bg-slate-800 text-lg border border-slate-700 rounded-lg p-1 px-12">Register</button>
                 </div>
             </div>
-            <div class="bg-slate-700 border border-gray-800 rounded-lg shadow-md p-5 h-full w-full">
+            <div class="flex bg-slate-700 border border-gray-800 rounded-lg shadow-md p-3 h-full w-full">
+                <div class="flex items-center mx-auto mr-2">
+                    <img class="transition transform duration-300 ease-in-out hover:-translate-x-2" width="24" height="24" src="https://img.icons8.com/material-outlined/24/back--v1.png" alt="back--v1" id="arrow-back"/>
+                </div>
                 <table class="text-center h-full w-full" id="list-items">
                     <thead id="table-header">
+                        <tr>
+                            <th colspan="7" class="text-center border-collapse border border-slate-900" id="header"></th>
+                        </tr>
                         <tr>
                             <th class="item-header border-collapse border border-slate-900 py-2">Domingo</th>
                             <th class="item-header border-collapse border border-slate-900 py-2">Segunda</th>
@@ -64,7 +70,7 @@
                             <th class="item-header border-collapse border border-slate-900 py-2">Sábado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <tr>
                             <td class="item border-collapse border border-slate-900"></td>
                             <td class="item border-collapse border border-slate-900"></td>
@@ -112,6 +118,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="flex items-center mx-auto ml-2">
+                    <img class="transition transform duration-300 ease-in-out hover:translate-x-2" width="24" height="24" src="https://img.icons8.com/material-outlined/24/forward.png" alt="forward" id="arrow-forward"/>
+                </div>
             </div>
         </form>
     </main>
