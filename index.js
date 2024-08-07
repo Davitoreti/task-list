@@ -45,28 +45,40 @@ makeDays();
 
 function renderCalendar() {
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const totalDays = daysInMonth(currentMonth, currentYear)
+    const totalDays = daysInMonth(currentMonth, currentYear);
     let dayCounter = 1;
 
-    for (let i = 0; i < td.length; i++) {
-        td[i].innerText = '';
+    tbody.innerHTML = '';
+
+    let tr = document.createElement('tr');
+    // Adiciona células vazias até o primeiro dia do mês
+    for (let i = 0; i < firstDay; i++) {
+        let td = document.createElement('td');
+        td.setAttribute('class', 'item border-collapse border border-slate-900');
+        tr.appendChild(td);
     }
 
+    // Adiciona os dias do mês
     for (let i = firstDay; i < firstDay + totalDays; i++) {
-        if (i < td.length) {
-            td[i].innerText = dayCounter++;
+        if (tr.children.length >= 7) {
+            tbody.appendChild(tr);
+            tr = document.createElement('tr');
         }
+        let td = document.createElement('td');
+        td.innerText = dayCounter++;
+        td.setAttribute('class', 'item border-collapse border border-slate-900');
+        tr.appendChild(td);
     }
-}
 
-if(td.length > 35){
-    const newTr = document.createElement('tr');
-    for(let i = 0; i <= 6; i++){
-        let newTd = document.createElement('td');
-        newTd.setAttribute('class', 'item border-collapse border border-slate-900');
-        newTr.appendChild(newTd);
+    // Adiciona a última linha ao tbody
+    tbody.appendChild(tr);
+
+    // Preenche a última linha com células vazias se necessário
+    while (tr.children.length < 7) {
+        let td = document.createElement('td');
+        td.setAttribute('class', 'item border-collapse border border-slate-900');
+        tr.appendChild(td);
     }
-    tbody.appendChild(newTr);
 }
 
 function updateHeader() {
