@@ -111,6 +111,9 @@ function makeTask(ev) {
     const startDateInput = document.getElementById('startDate').value;
     const endDateInput = document.getElementById('endDate').value;
 
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const totalDays = daysInMonth(currentMonth, currentYear);
+
     const startDate = new Date(startDateInput + 'T00:00:00');
     const endDate = new Date(endDateInput + 'T00:00:00');
 
@@ -125,9 +128,12 @@ function makeTask(ev) {
         return `${day}/${month}/${year}`;
     };
 
-    td.innerText = 'Task: ' + textArea + '\n' + 'Start date: ' + formattedStartDate + '\n' + 'End date: ' + formattedEndDate + '\n\n';
+    for (let i = currentDate; i < firstDay + totalDays; i++) {
+        td[i].innerText = 'Task: ' + textArea + '\n' + 'Start date: ' + formattedStartDate + '\n' + 'End date: ' + formattedEndDate + '\n\n';
+        tr.appendChild(td);
+    }
 
-    table.append(td);
+    table.append(tr);
 
 };
 
