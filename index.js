@@ -1,7 +1,3 @@
-const registerButton = document.getElementById('register-button');
-
-registerButton.addEventListener('click', makeList);
-
 const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
 
 let nameMonths = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
@@ -9,7 +5,8 @@ let nameDaysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira'
 
 const table = document.getElementById('list-items');
 const th = document.querySelectorAll('item-header');
-const td = document.getElementsByTagName('td');
+let td = document.getElementsByTagName('td');
+let tr = document.getElementsByTagName('tr');
 const tbody = document.getElementById('tbody');
 let header = document.getElementById('header');
 
@@ -21,18 +18,13 @@ let currentYear = currentDate.getFullYear();
 
 header.innerText = `${nameMonths[currentMonth]} - ${currentYear}`
 
-// getDate() = número do dia (no caso hoje é dia 05, então vai retornar 5)
-// getDay() = número do dia da semana (0 = domingo, 1 = segunda...)
-
-function makeDays() {
+function makeFirstMonth() {
     let dayCounter = 1;
     for (let i = 0; i < td.length; i++) {
         td[i].innerText = '';
     }
 
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-
-    console.log(firstDay)
 
     for (let i = firstDay; i < firstDay + daysInMonth(currentMonth, currentYear); i++) {
         if (i < td.length) {
@@ -41,7 +33,7 @@ function makeDays() {
     }
 }
 
-makeDays();
+makeFirstMonth();
 
 function renderCalendar() {
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -51,14 +43,13 @@ function renderCalendar() {
     tbody.innerHTML = '';
 
     let tr = document.createElement('tr');
-    // Adiciona células vazias até o primeiro dia do mês
+
     for (let i = 0; i < firstDay; i++) {
         let td = document.createElement('td');
         td.setAttribute('class', 'item border-collapse border border-slate-900');
         tr.appendChild(td);
     }
 
-    // Adiciona os dias do mês
     for (let i = firstDay; i < firstDay + totalDays; i++) {
         if (tr.children.length >= 7) {
             tbody.appendChild(tr);
@@ -70,10 +61,8 @@ function renderCalendar() {
         tr.appendChild(td);
     }
 
-    // Adiciona a última linha ao tbody
     tbody.appendChild(tr);
 
-    // Preenche a última linha com células vazias se necessário
     while (tr.children.length < 7) {
         let td = document.createElement('td');
         td.setAttribute('class', 'item border-collapse border border-slate-900');
@@ -111,7 +100,11 @@ const arrowBack = document.getElementById('arrow-back').addEventListener('click'
     renderCalendar();
 })
 
-function makeList(ev) {
+const registerButton = document.getElementById('register-button');
+
+registerButton.addEventListener('click', makeTask);
+
+function makeTask(ev) {
     ev.preventDefault();
 
     const textArea = document.getElementById('textAreaTask').value;
@@ -124,17 +117,17 @@ function makeList(ev) {
     const formattedStartDate = formatDateToBrazilian(startDate);
     const formattedEndDate = formatDateToBrazilian(endDate);
 
+    function formatDateToBrazilian(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+    
+        return `${day}/${month}/${year}`;
+    };
+
     td.innerText = 'Task: ' + textArea + '\n' + 'Start date: ' + formattedStartDate + '\n' + 'End date: ' + formattedEndDate + '\n\n';
 
-    table.appendChild(td);
+    table.append(td);
 
-};
-
-function formatDateToBrazilian(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
 };
 
