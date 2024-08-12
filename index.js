@@ -74,7 +74,9 @@ function updateHeader() {
     header.innerText = `${nameMonths[currentMonth]} - ${currentYear}`;
 }
 
-const arrowForward = document.getElementById('arrow-forward').addEventListener('click', function (ev) {
+const arrowForward = document.getElementById('arrow-forward').addEventListener('click', advance);
+
+function advance(ev){
     ev.preventDefault();
 
     currentMonth++
@@ -85,9 +87,11 @@ const arrowForward = document.getElementById('arrow-forward').addEventListener('
 
     updateHeader();
     renderCalendar();
-})
+}
 
-const arrowBack = document.getElementById('arrow-back').addEventListener('click', function (ev) {
+const arrowBack = document.getElementById('arrow-back').addEventListener('click', goBack);
+
+    function goBack(ev) {
     ev.preventDefault();
 
     currentMonth--
@@ -98,7 +102,7 @@ const arrowBack = document.getElementById('arrow-back').addEventListener('click'
 
     updateHeader();
     renderCalendar();
-})
+}
 
 const registerButton = document.getElementById('register-button');
 
@@ -111,29 +115,34 @@ function makeTask(ev) {
     const startDateInput = document.getElementById('startDate').value;
     const endDateInput = document.getElementById('endDate').value;
 
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const totalDays = daysInMonth(currentMonth, currentYear);
-
     const startDate = new Date(startDateInput + 'T00:00:00');
     const endDate = new Date(endDateInput + 'T00:00:00');
 
-    const formattedStartDate = formatDateToBrazilian(startDate);
-    const formattedEndDate = formatDateToBrazilian(endDate);
+    const firstDay = new Date(currentYear, currentMonth, 0).getDay();
+    const totalDays = daysInMonth(currentMonth, currentYear);
 
     function formatDateToBrazilian(date) {
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
     
-        return `${day}/${month}/${year}`;
+        return `${day}/${month}/${year}`; 
     };
 
-    for (let i = currentDate; i < firstDay + totalDays; i++) {
-        td[i].innerText = 'Task: ' + textArea + '\n' + 'Start date: ' + formattedStartDate + '\n' + 'End date: ' + formattedEndDate + '\n\n';
-        tr.appendChild(td);
+    const formattedStartDate = formatDateToBrazilian(startDate);
+    const formattedEndDate = formatDateToBrazilian(endDate);
+
+    const startMonth = startDate.getMonth();
+    const startYear = startDate.getFullYear();
+
+    if (startMonth !== currentMonth || startYear !== currentYear) {
+        currentMonth = startMonth;
+        currentYear = startYear;
+        renderCalendar();
+        updateHeader();
     }
 
-    table.append(tr);
-
+    for (let i = firstDay + parseInt(formattedStartDate); i < firstDay + totalDays; i++) {
+        td[i].innerText += `\nTask: ${textArea}\nStart date: ${formattedStartDate}\nEnd date: ${formattedEndDate}\n\n`;
+    }
 };
-
