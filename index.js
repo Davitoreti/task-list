@@ -63,10 +63,18 @@ function renderCalendar() {
 
     tbody.appendChild(tr);
 
-    while (tr.children.length < 7) {
-        let td = document.createElement('td');
-        td.setAttribute('class', 'item border-collapse border border-slate-900');
-        tr.appendChild(td);
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+    const cells = tbody.getElementsByTagName('td');
+
+    for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i];
+        const day = parseInt(cell.innerText);
+        if (!isNaN(day)) {
+            const taskDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            if (tasks[taskDate]) {
+                cell.innerHTML += tasks[taskDate].map(task => `<p>${task}</p>`).join('');
+            }
+        }
     }
 }
 
@@ -110,9 +118,14 @@ registerButton.addEventListener('click', makeTask);
 function makeTask(ev) {
     ev.preventDefault();
 
-    const textArea = document.getElementById('textAreaTask').value;
+    const textArea = document.getElementById('textAreaTask').value.trim();
     const startDateInput = document.getElementById('startDate').value;
     const endDateInput = document.getElementById('endDate').value;
+
+    if (!textArea || !startDateInput || !endDateInput) {
+        alert('Preencha todos os campos.');
+        return;
+    }
 
     const startDate = new Date(startDateInput + 'T00:00:00');
     const endDate = new Date(endDateInput + 'T00:00:00');
@@ -139,17 +152,23 @@ function makeTask(ev) {
         updateHeader();
     }
 
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const totalDays = daysInMonth(currentMonth, currentYear);
+    const taskDetails = `<br>Task: ${textArea}<br>Start date: ${formattedStartDate}<br>End date: ${formattedEndDate}<br>`;
 
-    // Itera sobre as células do calendário para encontrar a célula do dia selecionado
-    for (let i = firstDay; i < firstDay + totalDays; i++) {
-        let cell = td[i];
-        let cellDay = parseInt(cell.innerText);
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
 
-        // Adiciona a tarefa ao dia correto
-        if (cellDay === startDay) {
-            cell.innerText += `\n\nTask: ${textArea}\nStart date: ${formattedStartDate}\nEnd date: ${formattedEndDate}\n`;
-        }
-    }
+    const taskDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`;
+    tasks[taskDate] = tasks[taskDate] || [];
+    tasks[taskDate].push(taskDetails);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    document.getElementById('textAreaTask').value = '';
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+
+    renderCalendar();
+};
+
+window.onload = function() {
+    renderCalendar();
 };
