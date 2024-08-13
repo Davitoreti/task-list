@@ -105,7 +105,6 @@ const arrowBack = document.getElementById('arrow-back').addEventListener('click'
 }
 
 const registerButton = document.getElementById('register-button');
-
 registerButton.addEventListener('click', makeTask);
 
 function makeTask(ev) {
@@ -118,9 +117,6 @@ function makeTask(ev) {
     const startDate = new Date(startDateInput + 'T00:00:00');
     const endDate = new Date(endDateInput + 'T00:00:00');
 
-    const firstDay = new Date(currentYear, currentMonth, 0).getDay();
-    const totalDays = daysInMonth(currentMonth, currentYear);
-
     function formatDateToBrazilian(date) {
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -132,6 +128,7 @@ function makeTask(ev) {
     const formattedStartDate = formatDateToBrazilian(startDate);
     const formattedEndDate = formatDateToBrazilian(endDate);
 
+    const startDay = startDate.getDate();
     const startMonth = startDate.getMonth();
     const startYear = startDate.getFullYear();
 
@@ -142,7 +139,17 @@ function makeTask(ev) {
         updateHeader();
     }
 
-    for (let i = firstDay + parseInt(formattedStartDate); i < firstDay + totalDays; i++) {
-        td[i].innerText += `\nTask: ${textArea}\nStart date: ${formattedStartDate}\nEnd date: ${formattedEndDate}\n\n`;
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const totalDays = daysInMonth(currentMonth, currentYear);
+
+    // Itera sobre as células do calendário para encontrar a célula do dia selecionado
+    for (let i = firstDay; i < firstDay + totalDays; i++) {
+        let cell = td[i];
+        let cellDay = parseInt(cell.innerText);
+
+        // Adiciona a tarefa ao dia correto
+        if (cellDay === startDay) {
+            cell.innerText += `\n\nTask: ${textArea}\nStart date: ${formattedStartDate}\nEnd date: ${formattedEndDate}\n`;
+        }
     }
 };
